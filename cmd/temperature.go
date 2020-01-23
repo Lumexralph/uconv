@@ -1,8 +1,9 @@
 package cmd
 
 import (
-	"errors"
 	"fmt"
+	"strconv"
+
 	"github.com/spf13/cobra"
 )
 
@@ -23,12 +24,21 @@ var tempCmd = &cobra.Command{
 	Fahrenheit - f and Celsius - c`,
 	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("I need to convert this unit: ", args[0])
+		// convert the string to int
+		arg, err := strconv.ParseInt(args[0], 10, 64)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		result := celsiusToFahrenheit(arg)
+		// °F
+		fmt.Println("I need to convert this unit: ", result, "°F")
 	},
 }
 
 // CelsiusToFahrenheit - converts Celsius to Fahrenheit
-func CelsiusToFahrenheit(data int) int {
+func celsiusToFahrenheit(data int64) int64 {
 	return (data * 9 / 5) + 32
 }
 
@@ -59,10 +69,10 @@ func CelsiusToFahrenheit(data int) int {
 
 // Reporter - handles the designation of temperature conversion
 // to the appropriate converter and displays the result
-func Reporter(data int, from, to string) (int, error) {
-	switch {
-	case from == "c" && to == "f":
-		return CelsiusToFahrenheit(data), nil
-	}
-	return 0, errors.New("No valid temperature unit provided, should be k, c, f")
-}
+// func Reporter(data int, from, to string) (int, error) {
+// 	switch {
+// 	case from == "c" && to == "f":
+// 		return CelsiusToFahrenheit(data), nil
+// 	}
+// 	return 0, errors.New("No valid temperature unit provided, should be k, c, f")
+// }
