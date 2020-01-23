@@ -6,7 +6,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var to, from string
+
 func init() {
+	tempCmd.Flags().StringVarP(&from, "from", "f", "c", "the unit to convert from")
+	tempCmd.Flags().StringVarP(&to, "to", "t", "f", "the unit to convert to")
+
 	rootCmd.AddCommand(tempCmd)
 }
 
@@ -14,10 +19,11 @@ var tempCmd = &cobra.Command{
 	Use:   "temperature",
 	Short: "Convert temperature for different units",
 	Long: `temp is a sub-command for uconv (unit converter),
-			it helps to convert temperature from one unit to another, Kelvin,
-			Fahrenheit and Celsius`,
+	it helps to convert temperature from one unit to another, Kelvin - k,
+	Fahrenheit - f and Celsius - c`,
+	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("This is the temperature converter for the unit converter")
+		fmt.Println("I need to convert this unit: ", args[0])
 	},
 }
 
