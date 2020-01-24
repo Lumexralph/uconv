@@ -31,9 +31,7 @@ var rootCmd = &cobra.Command{
 	Use:   "uconv",
 	Short: "A multi-purpose unit converter",
 	Long: `uconv is a CLI tool that helps you convert a value from one unit to another
-	It can be used for temperature, weight, area, length, currency
-
-	Usage: uconv temperature 50 from --c --to k`,
+	It can be used for temperature, weight, area, length, currency`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
