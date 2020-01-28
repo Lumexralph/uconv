@@ -7,11 +7,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var to, from string
+var tempTo, tempFrom string
 
 func init() {
-	tempCmd.Flags().StringVarP(&from, "from", "f", "c", "the unit to convert from")
-	tempCmd.Flags().StringVarP(&to, "to", "t", "f", "the unit to convert to")
+	tempCmd.Flags().StringVarP(&tempFrom, "from", "f", "c", "the unit to convert from")
+	tempCmd.Flags().StringVarP(&tempTo, "to", "t", "f", "the unit to convert to")
 
 	rootCmd.AddCommand(tempCmd)
 }
@@ -46,20 +46,20 @@ func executeTemperatureCmd(cmd *cobra.Command, args []string) {
 
 	switch {
 	// TODO: Make the flags caps insensitive
-	case from == "c" && to == "f":
+	case tempFrom == "c" && tempTo == "f":
 		fmt.Printf("temperature: %d°C ==> %d°F\n", arg, celsiusToFahrenheit(arg))
-	case from == "f" && to == "c":
+	case tempFrom == "f" && tempTo == "c":
 		fmt.Printf("temperature: %d°F ==> %d°C\n", arg, fahrenheitToCelsius(arg))
-	case from == "c" && to == "k":
+	case tempFrom == "c" && tempTo == "k":
 		fmt.Printf("temperature: %d°C ==> %dK\n", arg, celsiusToKelvin(arg))
-	case from == "f" && to == "k":
+	case tempFrom == "f" && tempTo == "k":
 		fmt.Printf("temperature: %d°F ==> %dK\n", arg, fahrenheitToKelvin(arg))
-	case from == "k" && to == "c":
+	case tempFrom == "k" && tempTo == "c":
 		fmt.Printf("temperature: %dK ==> %d°C\n", arg, kelvinToCelsius(arg))
-	case from == "k" && to == "f":
+	case tempFrom == "k" && tempTo == "f":
 		fmt.Printf("temperature: %dK ==> %d°F\n", arg, kelvinToFahrenheit(arg))
-	case from == to:
-		fmt.Printf("temperature: %d%s\n", arg, to)
+	case tempFrom == tempTo:
+		fmt.Printf("temperature: %d%s\n", arg, tempTo)
 	}
 }
 
