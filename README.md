@@ -23,7 +23,7 @@ Build and install the tool in your computer
 
     go install .
 
-uconv gets added as a binary in your computer and you can produce using it.
+uconv gets added as a binary in your computer and you can start using it.
 
 ## Usage Example
 
